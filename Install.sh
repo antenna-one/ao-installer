@@ -166,15 +166,17 @@ echo -e "$GREEN PREREQUISITES INSTALLED $NORMAL"
 read
 ### END OF PREREQUISITES
 
-### START INSTALLING APPLICATIONS
-if [ ! -d "/home/$USER/dab/mmbtools-aux" ];then
-echo -e "$GREEN Fetching mmbtools-aux $NORMAL"
-git clone https://github.com/mpbraendli/mmbtools-aux.git
-pushd mmbtools-aux
-cd zmqtest/zmq-sub/
-make
-popd
-fi
+# START INSTALLING APPLICATIONS
+
+# THIS MODULE ERRORS
+# if [ ! -d "/home/$USER/dab/mmbtools-aux" ];then
+# echo -e "$GREEN Fetching mmbtools-aux $NORMAL"
+# git clone https://github.com/mpbraendli/mmbtools-aux.git
+# pushd mmbtools-aux
+# cd zmqtest/zmq-sub/
+# make
+# popd
+# fi
 
 if [ ! -d "/home/$USER/dab/etisnoop" ];then
 echo -e "$GREEN Fetching etisnoop $NORMAL"
@@ -186,8 +188,6 @@ make
 sudo make install
 popd
 fi
-
-# WORKING TO HERE
 
 
 if [ ! -d "/home/$USER/dab/ODR-DabMux" ];then
