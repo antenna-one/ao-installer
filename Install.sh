@@ -92,6 +92,16 @@ fi
 set -e
 
 
+echo -e "$GREEN Removing unwated applications $NORMAL"
+# This will uninstall packages that are unwanted
+
+sudo apt remove -y thunderbird firefox transmission-gtk \
+gnome-mines pidgin sgt-puzzles simple-scan libreoffice* \
+atril ristretto orage xfburn xfce4-dict \
+xfce4-screenshooter xfce4-terminal parole \
+xfce4-notes mousepad gnome-sudoku gimp
+
+sudo apt-get autoremove -y
 
 echo -e "$GREEN Updating Ubuntu package repositories $NORMAL"
 sudo apt-get -y update
