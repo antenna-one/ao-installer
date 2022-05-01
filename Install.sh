@@ -5,35 +5,46 @@ RED="\e[91m"
 GREEN="\e[92m"
 NORMAL="\e[0m"
 COIN="\e[35m"
-BLEU="\e[104m"
+BLUE="\e[104m"
 ccl="\e[1;49;93m"
 Dossier=$(pwd)
 DISTRO="unknown"
 
-# Begin Installer Menu
+# Clear Terminal Window And Begin Installer Menu
 clear
-echo -e $RED 
-echo " This is the installer script for : "
+echo -e "$RED *********************************************************** $NORMAL"
+echo -e "$RED This is the Antenna-One installer script for the following: $NORMAL"
+echo -e "$RED *********************************************************** $NORMAL"
 echo
-echo -e $GREEN "* ODR-mmbTools: "
-echo "  *   ODR-DabMux "
-echo "  *   ODR-AudioEnc "
-echo "  *   ODR-PadEnc "
-echo "  *   ODR-DabMod "
-echo "  *   HackRF drivers "
-echo "  *   PadTool "
-echo "  *   DABlin "
-echo "  *   Auxiliary scripts "
-echo "  *   The FDK-AACv2 library with DAB+ patch "
-echo "  *   Supervisor (automatisation of all tools) "
+echo -e "$GREEN *********************************************************** $NORMAL"
+echo -e "$GREEN + ODR-mmbTools: 				            $NORMAL"
+echo -e "$GREEN    + ODR-DabMux                                             $NORMAL"
+echo -e "$GREEN    +  ODR-AudioEnc                                          $NORMAL"
+echo -e "$GREEN    +  ODR-PadEnc                                            $NORMAL"
+echo -e "$GREEN    +  ODR-DabMod                                            $NORMAL"
+echo -e "$GREEN    +  HackRF drivers                                        $NORMAL"
+echo -e "$GREEN    +  PadTool                                               $NORMAL"
+echo -e "$GREEN    +  DABlin                                                $NORMAL"
+echo -e "$GREEN    +  Auxiliary scripts                                     $NORMAL"
+echo -e "$GREEN    +  The FDK-AACv2 library with DAB+ patch                 $NORMAL"
+echo -e "$GREEN    +  Supervisor Tools (and automatisation of all tools)    $NORMAL"
+echo -e "$GREEN *********************************************************** $NORMAL"
 echo
-echo " We then preconfigure the multiplex with DLS and SLS (Slideshows) "
-echo " "
-echo " This script will update the Operating Sytem "
-echo " with all necessary prerequisits before hand. "
-echo -e $NORMAL
+echo -e "$GREEN *********************************************************** $NORMAL"
+echo -e "$GREEN We then preconfigure the multiplex with DLS and SLS         $NORMAL"
+echo -e "$GREEN (Slideshows)                                                $NORMAL"
+echo -e "$GREEN *********************************************************** $NORMAL"
+echo
+echo -e "$RED *********************************************************** $NORMAL"
+echo -e "$RED This script will make changes to the Operating System and   $NORMAL"
+echo -e "$RED these changes cant be revered easily!  It will update all   $NORMAL"
+echo -e "$RED packages and remove unwanted applications automatically.    $NORMAL"
+echo -e "$RED *********************************************************** $NORMAL"
 
-echo "Checking Operating System type and version... "
+
+# Carry Out Operating System Checks
+echo "Checking Operating System Type And Version... "
+echo "Done...! "
 echo "Adding necessary Sources... "
 
 if [ $(lsb_release -d | grep -c Ubuntu) -eq 1 ] && [ $(lsb_release -sc | grep -c focal) -eq 1 ] ; then
@@ -43,30 +54,30 @@ echo -e  "deb-src http://archive.ubuntu.com/ubuntu/ focal main restricted univer
 fi
 
 echo
-echo -e $COIN " Your version : $DISTRO "
-echo "========================================================="
-echo -e $NORMAL
+echo -e "$COIN *********************************************************** $NORMAL"
+echo -e "$COIN We have detected you are using:                             $NORMAL"
+echo -e "$COIN $DISTRO                                                     $NORMAL"
+echo -e "$COIN *********************************************************** $NORMAL"
 echo
-
-
 
 if [ "$DISTRO" == "unknown" ] ; then
     echo -e $RED
     echo "You seem to be running something that"
     echo "this script doesn't yet"
-    echo "support."
+    echo "support, sorry :("
     echo -e $NORMAL
     exit 1
 fi
 
-echo -e $RED
-echo "This program will use sudo to install components on your"
-echo "system. Please read the script before you execute it, to"
-echo "understand what changes it will do to your system !"
 echo
-echo "There is no undo functionality here !"
-echo -e $NORMAL
+echo -e "$RED *********************************************************** $NORMAL"
+echo -e "$RED This script has carried out the necessary pre-checks and    $NORMAL"
+echo -e "$RED things are looking good, we will use SUDO to install all    $NORMAL"
+echo -e "$RED components, THERE IS NO UNDO FUNCTIONALITY!                 $NORMAL"
+echo -e "$RED *********************************************************** $NORMAL"
 
+
+# Check if the script is being run on Root and Sudo is installed
 if [ "$UID" == "0" ]
 then
     echo -e $RED
@@ -93,6 +104,7 @@ fi
 
 # Fail on error
 set -e
+
 
 # Remove Unwanted Packages
 echo -e "$GREEN ***************************** $NORMAL"
