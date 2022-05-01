@@ -45,7 +45,7 @@ echo -e "$RED *********************************************************** $NORMA
 # Carry Out Operating System Checks
 echo "Checking Operating System Type And Version... "
 echo "Done...! "
-echo "Adding necessary Sources... "
+echo "For us to add the correct source we will need to get "
 
 if [ $(lsb_release -d | grep -c Ubuntu) -eq 1 ] && [ $(lsb_release -sc | grep -c focal) -eq 1 ] ; then
 	DISTRO="focal"
@@ -54,10 +54,10 @@ echo -e  "deb-src http://archive.ubuntu.com/ubuntu/ focal main restricted univer
 fi
 
 echo
-echo -e "$COIN *********************************************************** $NORMAL"
-echo -e "$COIN We have detected you are using:                             $NORMAL"
-echo -e "$COIN $DISTRO                                                     $NORMAL"
-echo -e "$COIN *********************************************************** $NORMAL"
+echo -e "$BLUE *********************************************************** $NORMAL"
+echo -e "$BLUE We have detected you are using:                             $NORMAL"
+echo -e "$BLUE $DISTRO                                                     $NORMAL"
+echo -e "$BLUE *********************************************************** $NORMAL"
 echo
 
 if [ "$DISTRO" == "unknown" ] ; then
