@@ -10,7 +10,7 @@ Dossier=$(pwd)
 DISTRO="unknown"
 
 echo -e $RED 
-echo " Installer script for : "
+echo " This is the installer script for : "
 echo
 echo -e $GREEN "* ODR-mmbTools: "
 echo "  *   ODR-DabMux "
@@ -24,59 +24,20 @@ echo "  *   Auxiliary scripts "
 echo "  *   The FDK-AACv2 library with DAB+ patch "
 echo "  *   Supervisor (automatisation of all tools) "
 echo
-echo "  *   Preconfigured multiplex with DLS and SLS (Slideshows)
-
-#
-# and all required dependencies for a
-# Debian and Raspbian stable system.
-#
-# Requires: sudo"
+echo " We then preconfigure the multiplex with DLS and SLS (Slideshows) "
+echo " "
+echo " This script will update the Operating Sytem "
+echo " with all necessary prerequisits before hand. "
 echo -e $NORMAL
 
-if [ $(lsb_release -d | grep -c wheezy) -eq 1 ]; then
-echo -e $RED
-echo "Error, debian wheezy is not supported anymore"
-echo -e $NORMAL
-exit 1
-fi
+echo "Checking Operating System type and version... "
+echo "Adding necessary Sources... "
 
-if [ $(lsb_release -d | grep -c Debian) -eq 1 ] && [ $(lsb_release -sc | grep -c jessie) -eq 1  ]; then
-	DISTRO="jessie"
-echo -e "deb-src http://ftp.debian.org/debian/ jessie main contrib non-free" | sudo tee /etc/apt/sources.list.d/odr.list
+if [ $(lsb_release -d | grep -c Ubuntu) -eq 1 ] && [ $(lsb_release -sc | grep -c focal) -eq 1 ] ; then
+	DISTRO="focal"
+echo -e  "deb-src http://archive.ubuntu.com/ubuntu/ focal main restricted universe multiverse" | sudo tee /etc/apt/sources.list.d/odr.list
         LIST_APT="ok"
 fi
-if [ $(lsb_release -d | grep -c Raspbian) -eq 1 ] && [ $(lsb_release -sc | grep -c jessie) -eq 1 ]; then
-	DISTRO="jessie"
-echo -e "deb-src http://raspbian.raspberrypi.org/raspbian/ jessie main contrib non-free rpi" | sudo tee /etc/apt/sources.list.d/odr.list
-	LIST_APT="ok"
-fi
-
-
-if [ $(lsb_release -d | grep -c Debian) -eq 1 ] && [ $(lsb_release -sc | grep -c stretch) -eq 1 ]; then
-	DISTRO="stretch"
-echo -e  "deb-src http://ftp.debian.org/debian/ stretch main contrib non-free" | sudo tee /etc/apt/sources.list.d/odr.list
-        LIST_APT="ok"
-fi
-if [ $(lsb_release -d | grep -c Raspbian) -eq 1 ] && [ $(lsb_release -sc | grep -c stretch) -eq 1 ]; then
-	DISTRO="stretch"
-echo -e "deb-src http://raspbian.raspberrypi.org/raspbian/ stretch main contrib non-free rpi" | sudo tee /etc/apt/sources.list.d/odr.list
-        LIST_APT="ok"
-
-fi
-
-if [ $(lsb_release -d | grep -c Debian) -eq 1 ] && [ $(lsb_release -sc | grep -c buster) -eq 1 ] ; then
-	DISTRO="buster"
-echo -e  "deb-src http://ftp.debian.org/debian/ buster main contrib non-free" | sudo tee /etc/apt/sources.list.d/odr.list
-        LIST_APT="ok"
-
-
-fi
-if [ $(lsb_release -d | grep -c Raspbian) -eq 1 ] && [ $(lsb_release -sc | grep -c buster) -eq 1 ]; then
-        DISTRO="buster"
-echo -e "deb-src http://raspbian.raspberrypi.org/raspbian/ buster contrib non-free rpi" | sudo tee /etc/apt/sources.list.d/odr.list
-	LIST_APT="ok"
-fi
-
 
 echo
 echo -e $COIN " Your version : $DISTRO "
@@ -88,9 +49,9 @@ echo
 
 if [ "$DISTRO" == "unknown" ] ; then
     echo -e $RED
-    echo "You seem to be running something else than"
-    echo "debian jessie, stretch or buster. This script doesn't"
-    echo "support your distribution."
+    echo "You seem to be running something that"
+    echo "this script doesn't yet"
+    echo "support."
     echo -e $NORMAL
     exit 1
 fi
@@ -119,6 +80,7 @@ then
     echo "or Enter to proceed"
 
     read
+
 else
     echo -e $RED
     echo -e "Please install sudo first $NORMAL using"
@@ -131,7 +93,7 @@ set -e
 
 
 
-echo -e "$GREEN Updating debian package repositories $NORMAL"
+echo -e "$GREEN Updating Ubuntu package repositories $NORMAL"
 sudo apt-get -y update
 
 echo -e "$GREEN Installing essential prerequisites $NORMAL"
@@ -148,9 +110,9 @@ libcurl4-openssl-dev \
 libmagickwand-dev \
 libvlc-dev vlc-data \
 libfaad2 libfaad-dev \
-python-mako python-requests \
 supervisor \
-pulseaudio gqrx-sdr gr-osmosdr hackrf
+pulseaudio gqrx-sdr gr-osmosdr hackrf \
+
 
 if [[ "$DISTRO" == "jessie" || "$DISTRO" == "stretch" ]] ; then
 
@@ -179,7 +141,9 @@ fi
 echo -e "$GREEN Installing PadTool prerequisites $NORMAL"
 # PadTool essential prerequisistes
 
-sudo apt-get -y install python3 python3-pip chromium chromium-driver
+sudo apt-get -y install python3 python3-pip chromium-browser chromium-chromedriver python3-pyscard
+
+sudo pip3 install PyOpenSSL
 sudo pip3 install selenium
 sudo pip3 install imgkit
 sudo pip3 install pillow
@@ -191,7 +155,7 @@ sudo apt-get -y build-dep uhd
 # stuff to install from source
 
 if [ ! -d "/home/$USER/dab" ];then
-echo "Création du dossier dab ( /home/$USER/dab/ )!";
+echo "Creating the DAB Folder here ( /home/$USER/dab/ )!";
 mkdir /home/$USER/dab
 fi
 
@@ -199,9 +163,10 @@ cd /home/$USER/dab/
 
 echo
 echo -e "$GREEN PREREQUISITES INSTALLED $NORMAL"
+read
 ### END OF PREREQUISITES
 
-
+### START INSTALLING APPLICATIONS
 if [ ! -d "/home/$USER/dab/mmbtools-aux" ];then
 echo -e "$GREEN Fetching mmbtools-aux $NORMAL"
 git clone https://github.com/mpbraendli/mmbtools-aux.git
@@ -221,6 +186,9 @@ make
 sudo make install
 popd
 fi
+
+# WORKING TO HERE
+
 
 if [ ! -d "/home/$USER/dab/ODR-DabMux" ];then
 echo -e "$GREEN Compiling ODR-DabMux $NORMAL"
