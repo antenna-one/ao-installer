@@ -78,6 +78,7 @@ echo -e "$RED *********************************************************** $NORMA
 
 
 # Check if the script is being run on Root and Sudo is installed
+echo "Checking if you are a using SUDO..."
 if [ "$UID" == "0" ]
 then
     echo -e $RED
@@ -90,9 +91,9 @@ fi
 which sudo
 if [ "$?" == "0" ]
 then
+    echo "Checks Complete! We are about to begin..."
     echo "Press Ctrl-C to abort installation"
     echo "or Enter to proceed"
-
     read
 
 else
