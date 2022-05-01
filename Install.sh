@@ -54,10 +54,10 @@ echo -e  "deb-src http://archive.ubuntu.com/ubuntu/ focal main restricted univer
 fi
 
 echo
-echo -e "$BLUE *********************************************************** $NORMAL"
-echo -e "$BLUE We have detected you are using:                             $NORMAL"
-echo -e "$BLUE $DISTRO                                                     $NORMAL"
-echo -e "$BLUE *********************************************************** $NORMAL"
+echo -e "$GREEN *********************************************************** $NORMAL"
+echo -e "$GREEN We have detected you are using:                             $NORMAL"
+echo -e "$GREEN $DISTRO                                                     $NORMAL"
+echo -e "$GREEN *********************************************************** $NORMAL"
 echo
 
 if [ "$DISTRO" == "unknown" ] ; then
