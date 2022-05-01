@@ -1,4 +1,4 @@
-# ODR_Tools installer V2 with full DAB+ multiplex, HackRF ONE and PadTool auto-configuration for Ubuntu.
+# ODR-Tools installer V2 with full DAB+ multiplex, HackRF ONE and PadTool auto-configuration for Ubuntu.
 
 
 ![Screenshot of a logo slide](https://github.com/DABodr/ODR-Tools_Installer_V2/blob/master/supervisor.png) 
