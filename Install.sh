@@ -195,10 +195,7 @@ echo -e "$GREEN Compiling ODR-DabMux $NORMAL"
 git clone https://github.com/Opendigitalradio/ODR-DabMux.git
 pushd ODR-DabMux
 ./bootstrap.sh
-if [ $(lsb_release -d | grep -c Raspbian) -eq 1 ]; then
-./configure --enable-input-zeromq --enable-output-zeromq --with-boost-libdir=/usr/lib/arm-linux-gnueabihf
-else
-./configure --enable-input-zeromq --enable-output-zeromq --with-boost-libdir=/usr/lib/i386-linux-gnu
+./configure --with-boost-libdir=/usr/lib/i386-linux-gnu
 fi
 make
 sudo make install
