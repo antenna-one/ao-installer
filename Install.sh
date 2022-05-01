@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Set Variables Here
 RED="\e[91m"
 GREEN="\e[92m"
 NORMAL="\e[0m"
@@ -9,6 +10,8 @@ ccl="\e[1;49;93m"
 Dossier=$(pwd)
 DISTRO="unknown"
 
+# Begin Installer Menu
+clear
 echo -e $RED 
 echo " This is the installer script for : "
 echo
@@ -91,10 +94,10 @@ fi
 # Fail on error
 set -e
 
-
+# Remove Unwanted Packages
+echo -e "$GREEN ***************************** $NORMAL"
 echo -e "$GREEN Removing unwated applications $NORMAL"
-# This will uninstall packages that are unwanted
-
+echo -e "$GREEN ***************************** $NORMAL"
 sudo apt remove -y thunderbird firefox transmission-gtk \
 gnome-mines pidgin sgt-puzzles simple-scan libreoffice* \
 atril ristretto orage xfburn xfce4-dict \
@@ -103,12 +106,18 @@ xfce4-notes mousepad gnome-sudoku gimp
 
 sudo apt-get autoremove -y
 
+
+# Updating Repositories
+echo -e "$GREEN ************************************ $NORMAL"
 echo -e "$GREEN Updating Ubuntu package repositories $NORMAL"
+echo -e "$GREEN ************************************ $NORMAL"
 sudo apt-get -y update
 
-echo -e "$GREEN Installing essential prerequisites $NORMAL"
-# some essential and less essential prerequisistes
 
+# Adding Prerequisits
+echo -e "$GREEN ********************************** $NORMAL"
+echo -e "$GREEN Installing essential prerequisites $NORMAL"
+echo -e "$GREEN ********************************** $NORMAL"
 sudo apt-get -y install build-essential git wget \
 sox alsa-tools alsa-utils \
 automake libtool mpg123 \
@@ -122,34 +131,14 @@ libvlc-dev vlc-data \
 libfaad2 libfaad-dev \
 supervisor \
 pulseaudio gqrx-sdr gr-osmosdr hackrf \
+vlc-plugin-base libzmq3-dev libzmq5
 
 
-if [[ "$DISTRO" == "jessie" || "$DISTRO" == "stretch" ]] ; then
-
-sudo apt-get -y install vlc-nox
-
-elif [ "$DISTRO" == "buster" ] ; then
-
-sudo apt-get -y install vlc-plugin-base
-
-fi
-
-if [ "$DISTRO" == "jessie" ] ; then
-
-sudo apt-get -y install libzmq3-dev libzmq3
-
-elif [ "$DISTRO" == "stretch" ] ; then
-
-sudo apt-get -y install libzmq3-dev libzmq5
-
-elif [ "$DISTRO" == "buster" ] ; then
-
-sudo apt-get -y install libzmq5-dev libzmq5
-
-fi
-
+# Adding Prerequistis for PadTool
+echo -e "$GREEN ******************************** $NORMAL"
 echo -e "$GREEN Installing PadTool prerequisites $NORMAL"
-# PadTool essential prerequisistes
+echo -e "$GREEN ******************************** $NORMAL"
+
 
 sudo apt-get -y install python3 python3-pip chromium-browser chromium-chromedriver python3-pyscard
 
@@ -172,7 +161,10 @@ fi
 cd /home/$USER/dab/
 
 echo
+echo -e "$GREEN *********************** $NORMAL"
 echo -e "$GREEN PREREQUISITES INSTALLED $NORMAL"
+echo -e "$GREEN PRESS ENTER TO CONTINUE $NORMAL"
+echo -e "$GREEN *********************** $NORMAL"
 read
 ### END OF PREREQUISITES
 
