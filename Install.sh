@@ -117,7 +117,7 @@ firefox transmission-gtk \
 gnome-mines pidgin sgt-puzzles simple-scan libreoffice* \
 atril ristretto orage xfburn xfce4-dict \
 xfce4-screenshooter xfce4-terminal parole xfce4-notes \ 
-mousepad gnome-sudoku gimp info gigolo mate-calc atril
+mousepad gnome-sudoku gimp info gigolo mate-calc
 
 
 # Updating Repositories
