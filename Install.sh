@@ -225,16 +225,15 @@ fi
 
 
 # Install ODR-DabMux
-echo -e "$GREEN ******************************** $NORMAL"
-echo -e "$GREEN Install ODR-DabMux               $NORMAL"
-echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
+echo -e "$GREEN *                 Installing ODR-DabMux                       * $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
 if [ ! -d "/home/$USER/dab/ODR-DabMux" ];then
 echo -e "$GREEN Compiling ODR-DabMux $NORMAL"
 git clone https://github.com/Opendigitalradio/ODR-DabMux.git
 pushd ODR-DabMux
 ./bootstrap.sh
-./configure --with-boost-lib dir=/usr/lib/i386-linux-gnu
-fi
+./configure
 make
 sudo make install
 popd
