@@ -274,7 +274,7 @@ fi
 
 # Install PadTool
 echo -e "$GREEN ******************************** $NORMAL"
-echo -e "$GREEN Install PadTool            $NORMAL"
+echo -e "$GREEN Install PadTool                  $NORMAL"
 echo -e "$GREEN ******************************** $NORMAL"
 if [ ! -d "/home/$USER/dab/PadTool" ];then
 echo -e "$GREEN Compiling PadTool $NORMAL"
@@ -285,37 +285,10 @@ popd
 fi
 
 
-
-# end of Antenna Updates
-echo -e "$GREEN *END END END END END END END END* $NORMAL"
-echo -e "$GREEN *END END END END END END END END* $NORMAL"
-echo -e "$GREEN *END END END END END END END END* $NORMAL"
-
-READ
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# THIS MODULE ERRORS
-# if [ ! -d "/home/$USER/dab/mmbtools-aux" ];then
-# echo -e "$GREEN Fetching mmbtools-aux $NORMAL"
-# git clone https://github.com/mpbraendli/mmbtools-aux.git
-# pushd mmbtools-aux
-# cd zmqtest/zmq-sub/
-# make
-# popd
-# fi
-
+# Install etisnoop
+echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN Install etisnoop                 $NORMAL"
+echo -e "$GREEN ******************************** $NORMAL"
 if [ ! -d "/home/$USER/dab/etisnoop" ];then
 echo -e "$GREEN Fetching etisnoop $NORMAL"
 git clone https://github.com/Opendigitalradio/etisnoop.git
@@ -328,8 +301,10 @@ popd
 fi
 
 
-
-
+# Install Dablin
+echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN Install Dablin                   $NORMAL"
+echo -e "$GREEN ******************************** $NORMAL"
 if [ ! -d "/home/$USER/dab/dablin" ];then
 echo -e "$GREEN Compiling DABlin $NORMAL"
 sudo apt-get -y install libmpg123-dev libfaad-dev libsdl2-dev libgtkmm-3.0-dev
@@ -338,6 +313,23 @@ pushd dablin
 mkdir build
 cd build
 cmake ..
+make
+sudo make install 
+cd
+popd
+fi
+
+
+# Install mmbtools-aux
+echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN Install mmbtools-aux             $NORMAL"
+echo -e "$GREEN ******************************** $NORMAL"
+if [ ! -d "/home/$USER/dab/mmbtools-aux" ];then
+echo -e "$GREEN Fetching mmbtools-aux $NORMAL"
+git clone https://github.com/mpbraendli/mmbtools-aux.git
+pushd mmbtools-aux
+mkdir mmbtools-aux
+cd mmbtools-aux
 make
 sudo make install 
 cd
@@ -398,7 +390,7 @@ if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
    set -e
 echo -e $NORMAL
 echo 
-cd $Dossier
+cd $User
 sudo /etc/init.d/supervisor stop
 sudo cp -v supervisord.conf /etc/supervisor/supervisord.conf
 echo -e "[$GREEN OK $NORMAL]"
@@ -411,6 +403,8 @@ echo
 echo -e "[$GREEN OK $NORMAL]"
 echo
 echo -e "$GREEN FIFO file for HackRF $NORMAL"
+
+
 # creating FIFO
 sudo mkfifo /home/$USER/dab/config/ofdm.fifo
 echo
