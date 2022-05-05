@@ -109,9 +109,9 @@ set -e
 
 
 # Remove Unwanted Packages
-echo -e "$GREEN ***************************** $NORMAL"
-echo -e "$GREEN Removing unwated applications $NORMAL"
-echo -e "$GREEN ***************************** $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
+echo -e "$GREEN *          Removing Applications That Are Not Needed          * $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
 sudo apt-get remove --auto-remove -y thunderbird firefox transmission-gtk gnome-mines \
 pidgin sgt-puzzles simple-scan libreoffice* atril ristretto orage xfburn xfce4-dict \
 xfce4-screenshooter parole xfce4-notes mousepad gnome-sudoku gimp \
@@ -119,16 +119,16 @@ info gigolo mate-calc atril
 
 
 # Updating Repositories
-echo -e "$GREEN ************************************ $NORMAL"
-echo -e "$GREEN Updating Ubuntu package repositories $NORMAL"
-echo -e "$GREEN ************************************ $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
+echo -e "$GREEN *              Updating Ubuntu Package Repositories           * $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
 sudo apt-get -y update
 
 
 # Adding Prerequisits
-echo -e "$GREEN ********************************** $NORMAL"
-echo -e "$GREEN Installing essential prerequisites $NORMAL"
-echo -e "$GREEN ********************************** $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
+echo -e "$GREEN *                Installing Essential Prerequisits            * $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
 sudo apt-get -y install build-essential git wget \
 sox alsa-tools alsa-utils \
 automake libtool mpg123 \
@@ -146,9 +146,9 @@ vlc-plugin-base libzmq3-dev libzmq5
 
 
 # Adding Prerequistis for PadTool
-echo -e "$GREEN ******************************** $NORMAL"
-echo -e "$GREEN Installing PadTool prerequisites $NORMAL"
-echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
+echo -e "$GREEN *                 Installing PadTool Prerequisits             * $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
 sudo apt-get -y install python3 python3-pip chromium-browser chromium-chromedriver python3-pyscard
 
 sudo pip3 install PyOpenSSL
@@ -225,20 +225,20 @@ fi
 
 
 # Install ODR-DabMux
-# echo -e "$GREEN ******************************** $NORMAL"
-# echo -e "$GREEN Install ODR-DabMux               $NORMAL"
-# echo -e "$GREEN ******************************** $NORMAL"
-# if [ ! -d "/home/$USER/dab/ODR-DabMux" ];then
-# echo -e "$GREEN Compiling ODR-DabMux $NORMAL"
-# git clone https://github.com/Opendigitalradio/ODR-DabMux.git
-# pushd ODR-DabMux
-# ./bootstrap.sh
-# ./configure --with-boost-libdir=/usr/lib/i386-linux-gnu
-# fi
-# make
-# sudo make install
-# popd
-# fi
+echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN Install ODR-DabMux               $NORMAL"
+echo -e "$GREEN ******************************** $NORMAL"
+if [ ! -d "/home/$USER/dab/ODR-DabMux" ];then
+echo -e "$GREEN Compiling ODR-DabMux $NORMAL"
+git clone https://github.com/Opendigitalradio/ODR-DabMux.git
+pushd ODR-DabMux
+./bootstrap.sh
+./configure --with-boost-lib dir=/usr/lib/i386-linux-gnu
+fi
+make
+sudo make install
+popd
+fi
 
 
 # Install ODR-DabMod
