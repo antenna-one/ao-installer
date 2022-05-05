@@ -319,22 +319,22 @@ cd
 popd
 fi
 
-
+# FAULTY
 # Install mmbtools-aux
-echo -e "$GREEN ******************************** $NORMAL"
-echo -e "$GREEN Install mmbtools-aux             $NORMAL"
-echo -e "$GREEN ******************************** $NORMAL"
-if [ ! -d "/home/$USER/dab/mmbtools-aux" ];then
-echo -e "$GREEN Fetching mmbtools-aux $NORMAL"
-git clone https://github.com/mpbraendli/mmbtools-aux.git
-pushd mmbtools-aux
-mkdir mmbtools-aux
-cd mmbtools-aux
-make
-sudo make install 
-cd
-popd
-fi
+# echo -e "$GREEN ******************************** $NORMAL"
+# echo -e "$GREEN Install mmbtools-aux             $NORMAL"
+# echo -e "$GREEN ******************************** $NORMAL"
+# if [ ! -d "/home/$USER/dab/mmbtools-aux" ];then
+# echo -e "$GREEN Fetching mmbtools-aux $NORMAL"
+# git clone https://github.com/mpbraendli/mmbtools-aux.git
+# pushd mmbtools-aux
+# mkdir mmbtools-aux
+# cd mmbtools-aux
+# make
+# sudo make install 
+# cd
+# popd
+# fi
 
 
 # Applications Installed Message
