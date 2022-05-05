@@ -225,20 +225,20 @@ fi
 
 
 # Install ODR-DabMux
-echo -e "$GREEN ******************************** $NORMAL"
-echo -e "$GREEN Install ODR-DabMux               $NORMAL"
-echo -e "$GREEN ******************************** $NORMAL"
-if [ ! -d "/home/$USER/dab/ODR-DabMux" ];then
-echo -e "$GREEN Compiling ODR-DabMux $NORMAL"
-git clone https://github.com/Opendigitalradio/ODR-DabMux.git
-pushd ODR-DabMux
-./bootstrap.sh
-./configure --with-boost-libdir=/usr/lib/i386-linux-gnu
-fi
-make
-sudo make install
-popd
-fi
+# echo -e "$GREEN ******************************** $NORMAL"
+# echo -e "$GREEN Install ODR-DabMux               $NORMAL"
+# echo -e "$GREEN ******************************** $NORMAL"
+# if [ ! -d "/home/$USER/dab/ODR-DabMux" ];then
+# echo -e "$GREEN Compiling ODR-DabMux $NORMAL"
+# git clone https://github.com/Opendigitalradio/ODR-DabMux.git
+# pushd ODR-DabMux
+# ./bootstrap.sh
+# ./configure --with-boost-libdir=/usr/lib/i386-linux-gnu
+# fi
+# make
+# sudo make install
+# popd
+# fi
 
 
 # Install ODR-DabMod
@@ -346,48 +346,52 @@ popd
 fi
 
 
+# Applications Installed Message
+echo -e "$GREEN *************************************************************** $NORMAL"
+echo -e "$GREEN *            ALL APPLICATIONS HAVE BEEN INSTALLED!            * $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+# Adding Read as a Pause and then clear screen
+read
 clear
-echo
-echo -e "$GREEN Done installing all tools $NORMAL"
-echo
-echo
-echo -e "$GREEN All the tools have been dowloaded to the /home/$USER/dab/ folder,"
-echo -e "compiled and installed to /usr/local"
-echo
-echo -e "The stable versions have been compiled, i.e. the latest"
-echo -e "'master' branch from the git repositories"
-echo
-echo -e "If you know there is a new release, and you want to update,"
-echo -e "you have to go to the folder containing the tool, pull"
-echo -e "the latest changes from the repository and recompile"
-echo -e "it manually."
-echo
-echo -e "To pull the latest changes for ODR-DabMux, use:"
-echo -e " cd $USER/dab/ODR-DabMux"
-echo -e " git pull"
-echo -e " ./bootstrap.sh"
-echo -e " ./configure --enable-input-zeromq --enable-output-zeromq"
-echo -e " make"
-echo -e " sudo make install"
-echo
-echo -e "This example should give you the idea. For the options"
-echo -e "for compiling the other tools, please see in the ODRinstaller.sh"
-echo -e "script what options are used. Please also read the README"
-echo -e "and INSTALL files in the repositories. $NORMAL"
+
+
+# Applications Installed Message
+echo -e "$GREEN *************************************************************** $NORMAL"
+echo -e "$GREEN All the tools have been dowloaded to the following folder:      $NORMAL"
+echo -e "$GREEN  /home/$USER/dab/                                               $NORMAL"
+echo -e "$GREEN                                                                 $NORMAL"
+echo -e "$GREEN They have been complied and installed in:                       $NORMAL"
+echo -e "$GREEN /usr/local.                                                     $NORMAL"
+echo -e "$GREEN                                                                 $NORMAL"
+echo -e "$GREEN The stable versions have been compiled, i.e. the latest         $NORMAL"
+echo -e "$GREEN 'master' branch from the git repositories                       $NORMAL"
+echo -e "$GREEN                                                                 $NORMAL"
+echo -e "$GREEN If you know there is a new release, and you want to update,     $NORMAL"
+echo -e "$GREEN you have to go to the folder containing the tool, pull          $NORMAL"
+echo -e "$GREEN the latest changes from the repository and recompile            $NORMAL"
+echo -e "$GREEN it manually.                                                    $NORMAL"
+echo -e "$GREEN                                                                 $NORMAL"
+echo -e "$GREEN To pull the latest changes for ODR-DabMux, use:                 $NORMAL"
+echo -e "$GREEN cd $USER/dab/ODR-DabMux                                         $NORMAL"
+echo -e "$GREEN git pull                                                        $NORMAL"
+echo -e "$GREEN ./bootstrap.sh                                                  $NORMAL"
+echo -e "$GREEN ./configure --enable-input-zeromq --enable-output-zeromq        $NORMAL"
+echo -e "$GREEN make                                                            $NORMAL"
+echo -e "$GREEN sudo make install                                               $NORMAL"
+echo -e "$GREEN                                                                 $NORMAL"
+echo -e "$GREEN This example should give you the idea. For the options          $NORMAL"
+echo -e "$GREEN for compiling the other tools, please see in the                $NORMAL"
+echo -e "$GREEN ODRinstaller.sh script what options are used.                   $NORMAL"
+echo -e "$GREEN                                                                 $NORMAL"
+echo -e "$GREEN Please also read the README and INSTALL files                   $NORMAL"
+echo -e "$GREEN in the repositories.                                            $NORMAL"
+echo -e "$GREEN                                                                 $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
+
+
+# Start Script Configuration
 echo -e $RED
 read -r -p "Do you want to start configuration script? [Y/n]" response
 response=${response,,} # tolower
