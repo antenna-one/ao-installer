@@ -61,11 +61,12 @@ echo -e "$GREEN *********************************************************** $NOR
 echo
 
 if [ "$DISTRO" == "unknown" ] ; then
-    echo -e $RED
-    echo "You seem to be running something that"
-    echo "this script doesn't yet"
-    echo "support, sorry :("
-    echo -e $NORMAL
+echo
+echo -e "$RED *********************************************************** $NORMAL"
+echo -e "$RED                         SORRY!                              $NORMAL"
+echo -e "$RED This script is not yet compatible with the                  $NORMAL"
+echo -e "$RED Operating System you are using...                           $NORMAL"
+echo -e "$RED *********************************************************** $NORMAL"
     exit 1
 fi
 
@@ -111,13 +112,12 @@ set -e
 echo -e "$GREEN ***************************** $NORMAL"
 echo -e "$GREEN Removing unwated applications $NORMAL"
 echo -e "$GREEN ***************************** $NORMAL"
-sudo apt remove -y thunderbird firefox transmission-gtk \
+sudo apt-get remove --auto-remove -y thunderbird \
+firefox transmission-gtk \
 gnome-mines pidgin sgt-puzzles simple-scan libreoffice* \
 atril ristretto orage xfburn xfce4-dict \
-xfce4-screenshooter xfce4-terminal parole \
-xfce4-notes mousepad gnome-sudoku gimp
-
-sudo apt-get autoremove -y
+xfce4-screenshooter xfce4-terminal parole xfce4-notes \ 
+mousepad gnome-sudoku gimp info gigolo mate-calc atril
 
 
 # Updating Repositories
