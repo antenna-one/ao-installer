@@ -151,8 +151,6 @@ vlc-plugin-base libzmq3-dev libzmq5
 echo -e "$GREEN ******************************** $NORMAL"
 echo -e "$GREEN Installing PadTool prerequisites $NORMAL"
 echo -e "$GREEN ******************************** $NORMAL"
-
-
 sudo apt-get -y install python3 python3-pip chromium-browser chromium-chromedriver python3-pyscard
 
 sudo pip3 install PyOpenSSL
@@ -165,7 +163,6 @@ sudo pip3 install coverpy
 sudo apt-get -y build-dep uhd
 
 # stuff to install from source
-
 if [ ! -d "/home/$USER/dab" ];then
 echo "Creating the DAB Folder here ( /home/$USER/dab/ )!";
 mkdir /home/$USER/dab
@@ -178,10 +175,139 @@ echo -e "$GREEN *********************** $NORMAL"
 echo -e "$GREEN PREREQUISITES INSTALLED $NORMAL"
 echo -e "$GREEN PRESS ENTER TO CONTINUE $NORMAL"
 echo -e "$GREEN *********************** $NORMAL"
-read
 ### END OF PREREQUISITES
 
-# START INSTALLING APPLICATIONS
+# Adding Read as a Pause
+read
+
+
+# Start Adding Applications
+echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN Installing Applications          $NORMAL"
+echo -e "$GREEN ******************************** $NORMAL"
+
+
+# Install FDK-AAC
+echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN Installing FDK-AAC               $NORMAL"
+echo -e "$GREEN ******************************** $NORMAL"
+if [ ! -d "/home/$USER/dab/fdk-aac" ];then
+echo -e "$GREEN Compiling fdk-aac library $NORMAL"
+git clone https://github.com/Opendigitalradio/fdk-aac.git -b dabplus2
+pushd fdk-aac
+./bootstrap
+./configure
+make
+sudo make install
+popd
+fi
+
+
+# Update LD Cache
+echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN Updating LD Cache                $NORMAL"
+echo -e "$GREEN ******************************** $NORMAL"
+sudo ldconfig
+
+
+# Install ODR-Audio-Enc
+echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN Install ODR-Audio-Enc            $NORMAL"
+echo -e "$GREEN ******************************** $NORMAL"
+if [ ! -d "/home/$USER/dab/ODR-AudioEnc" ];then
+echo -e "$GREEN Compiling ODR-AudioEnc $NORMAL"
+git clone https://github.com/Opendigitalradio/ODR-AudioEnc.git
+pushd ODR-AudioEnc
+./bootstrap
+./configure --enable-alsa --enable-jack --enable-vlc --disable-uhd
+make
+sudo make install
+popd
+fi
+
+
+# Install ODR-DabMux
+echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN Install ODR-DabMux               $NORMAL"
+echo -e "$GREEN ******************************** $NORMAL"
+if [ ! -d "/home/$USER/dab/ODR-DabMux" ];then
+echo -e "$GREEN Compiling ODR-DabMux $NORMAL"
+git clone https://github.com/Opendigitalradio/ODR-DabMux.git
+pushd ODR-DabMux
+./bootstrap.sh
+./configure --with-boost-libdir=/usr/lib/i386-linux-gnu
+fi
+make
+sudo make install
+popd
+fi
+
+
+# Install ODR-DabMod
+echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN Install ODR-DabMod               $NORMAL"
+echo -e "$GREEN ******************************** $NORMAL"
+if [ ! -d "/home/$USER/dab/ODR-DabMod" ];then
+echo -e "$GREEN Compiling ODR-DabMod $NORMAL"
+git clone https://github.com/Opendigitalradio/ODR-DabMod.git
+pushd ODR-DabMod
+./bootstrap.sh
+./configure --with-debug-malloc=no --disable-debug --enable-fft-simd --enable-zeromq --disable-output-uhd
+make
+sudo make install
+popd
+fi
+
+
+# Install ODR-PadEnc
+echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN Install ODR-PadEnc               $NORMAL"
+echo -e "$GREEN ******************************** $NORMAL"
+if [ ! -d "/home/$USER/dab/ODR-PadEnc" ];then
+echo -e "$GREEN Compiling ODR-PadEnc $NORMAL"
+git clone https://github.com/Opendigitalradio/ODR-PadEnc.git
+pushd ODR-PadEnc
+./bootstrap
+./configure --enable-jack --enable-vlc
+make
+sudo make install
+popd
+fi
+
+
+# Install PadTool
+echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN Install PadTool            $NORMAL"
+echo -e "$GREEN ******************************** $NORMAL"
+if [ ! -d "/home/$USER/dab/PadTool" ];then
+echo -e "$GREEN Compiling PadTool $NORMAL"
+git clone https://github.com/fabcd14/PadTool
+pushd PadTool
+chmod +x ./padtool.py
+popd
+fi
+
+
+
+# end of Antenna Updates
+echo -e "$GREEN *END END END END END END END END* $NORMAL"
+echo -e "$GREEN *END END END END END END END END* $NORMAL"
+echo -e "$GREEN *END END END END END END END END* $NORMAL"
+
+READ
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # THIS MODULE ERRORS
 # if [ ! -d "/home/$USER/dab/mmbtools-aux" ];then
@@ -205,28 +331,7 @@ popd
 fi
 
 
-if [ ! -d "/home/$USER/dab/ODR-DabMux" ];then
-echo -e "$GREEN Compiling ODR-DabMux $NORMAL"
-git clone https://github.com/Opendigitalradio/ODR-DabMux.git
-pushd ODR-DabMux
-./bootstrap.sh
-./configure --with-boost-libdir=/usr/lib/i386-linux-gnu
-fi
-make
-sudo make install
-popd
-fi
 
-if [ ! -d "/home/$USER/dab/ODR-DabMod" ];then
-echo -e "$GREEN Compiling ODR-DabMod $NORMAL"
-git clone https://github.com/Opendigitalradio/ODR-DabMod.git
-pushd ODR-DabMod
-./bootstrap.sh
-./configure --with-debug-malloc=no --disable-debug --enable-fft-simd --enable-zeromq --disable-output-uhd
-make
-sudo make install
-popd
-fi
 
 if [ ! -d "/home/$USER/dab/dablin" ];then
 echo -e "$GREEN Compiling DABlin $NORMAL"
@@ -242,50 +347,21 @@ cd
 popd
 fi
 
-if [ ! -d "/home/$USER/dab/fdk-aac" ];then
-echo -e "$GREEN Compiling fdk-aac library $NORMAL"
-git clone https://github.com/Opendigitalradio/fdk-aac.git -b dabplus2
-pushd fdk-aac
-./bootstrap
-./configure
-make
-sudo make install
-popd
-fi
 
-echo -e "$GREEN Updating ld cache $NORMAL"
-# update ld cache
-sudo ldconfig
 
-if [ ! -d "/home/$USER/dab/ODR-AudioEnc" ];then
-echo -e "$GREEN Compiling ODR-AudioEnc $NORMAL"
-git clone https://github.com/Opendigitalradio/ODR-AudioEnc.git
-pushd ODR-AudioEnc
-./bootstrap
-./configure --enable-alsa --enable-jack --enable-vlc --disable-uhd
-make
-sudo make install
-popd
-fi
 
-if [ ! -d "/home/$USER/dab/ODR-PadEnc" ];then
-echo -e "$GREEN Compiling ODR-PadEnc $NORMAL"
-git clone https://github.com/Opendigitalradio/ODR-PadEnc.git
-pushd ODR-PadEnc
-./bootstrap
-./configure --enable-jack --enable-vlc
-make
-sudo make install
-popd
-fi
 
-if [ ! -d "/home/$USER/dab/PadTool" ];then
-echo -e "$GREEN Compiling PadTool $NORMAL"
-git clone https://github.com/fabcd14/PadTool
-pushd PadTool
-chmod +x ./padtool.py
-popd
-fi
+
+
+
+
+
+
+
+
+
+
+
 clear
 echo
 echo -e "$GREEN Done installing all tools $NORMAL"
