@@ -277,7 +277,6 @@ echo -e "$GREEN ******************************** $NORMAL"
 echo -e "$GREEN Install PadTool                  $NORMAL"
 echo -e "$GREEN ******************************** $NORMAL"
 if [ ! -d "/home/$USER/dab/PadTool" ];then
-echo -e "$GREEN Compiling PadTool $NORMAL"
 git clone https://github.com/fabcd14/PadTool
 pushd PadTool
 chmod +x ./padtool.py
@@ -286,11 +285,11 @@ fi
 
 
 # Install etisnoop
-echo -e "$GREEN ******************************** $NORMAL"
-echo -e "$GREEN Install etisnoop                 $NORMAL"
-echo -e "$GREEN ******************************** $NORMAL"
+
+echo -e "$GREEN *************************************************************** $NORMAL"
+echo -e "$GREEN *                   Installing etisnoop                       * $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
 if [ ! -d "/home/$USER/dab/etisnoop" ];then
-echo -e "$GREEN Fetching etisnoop $NORMAL"
 git clone https://github.com/Opendigitalradio/etisnoop.git
 pushd etisnoop
 ./bootstrap.sh
@@ -302,11 +301,10 @@ fi
 
 
 # Install Dablin
-echo -e "$GREEN ******************************** $NORMAL"
-echo -e "$GREEN Install Dablin                   $NORMAL"
-echo -e "$GREEN ******************************** $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
+echo -e "$GREEN *                    Installing DABlin                        * $NORMAL"
+echo -e "$GREEN *************************************************************** $NORMAL"
 if [ ! -d "/home/$USER/dab/dablin" ];then
-echo -e "$GREEN Compiling DABlin $NORMAL"
 sudo apt-get -y install libmpg123-dev libfaad-dev libsdl2-dev libgtkmm-3.0-dev
 git clone https://github.com/Opendigitalradio/dablin.git
 pushd dablin
@@ -325,7 +323,6 @@ fi
 # echo -e "$GREEN Install mmbtools-aux             $NORMAL"
 # echo -e "$GREEN ******************************** $NORMAL"
 # if [ ! -d "/home/$USER/dab/mmbtools-aux" ];then
-# echo -e "$GREEN Fetching mmbtools-aux $NORMAL"
 # git clone https://github.com/mpbraendli/mmbtools-aux.git
 # pushd mmbtools-aux
 # mkdir mmbtools-aux
@@ -391,7 +388,7 @@ if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
 echo -e $NORMAL
 echo 
 cd $User
-sudo /etc/init.d/supervisor stop
+# sudo /etc/init.d/supervisor stop
 sudo cp -v supervisord.conf /etc/supervisor/supervisord.conf
 echo -e "[$GREEN OK $NORMAL]"
 echo
